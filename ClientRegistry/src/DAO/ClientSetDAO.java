@@ -44,10 +44,7 @@ public class ClientSetDAO implements IClientDAO{
                     clientSaved.setName(client.getName());
                     clientSaved.setCpf(client.getCpf());
                     clientSaved.setTel(client.getTel());
-                    clientSaved.setAddr(client.getAddr());
-                    clientSaved.setNumber(client.getNumber());
-                    clientSaved.setCity(client.getCity());
-                    clientSaved.setState(client.getState());
+                    clientSaved.setEmail(client.getEmail());
                     break;
                 }
             }
