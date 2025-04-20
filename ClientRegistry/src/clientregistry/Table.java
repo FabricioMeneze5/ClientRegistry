@@ -8,7 +8,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Table {
     
-    private DefaultTableModel table = new DefaultTableModel();
+    private DefaultTableModel table = new DefaultTableModel() {
+        public boolean isCellEditable(int row, int column) {
+            return false; // Nenhuma célula pode ser editada
+        }
+    };
     
     public void initCustomComponents(JTable jTable) {
     table.addColumn("Name");
