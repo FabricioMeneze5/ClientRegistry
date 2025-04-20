@@ -18,7 +18,13 @@ public class ClientSetDAO implements IClientDAO{
 
     @Override
     public Boolean save(Client client) {
-        return this.set.add(client);
+        for (Client c : set) {
+            if(c.getCpf().equals(client.getCpf())) {
+                return false;
+            }
+        }
+        set.add(client);
+        return true;
     }
 
     @Override
