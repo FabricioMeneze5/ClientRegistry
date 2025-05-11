@@ -73,8 +73,18 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         buttonUpdate.setLabel("Update");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUpdateActionPerformed(evt);
+            }
+        });
 
         buttonDelete.setLabel("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         buttonFind.setLabel("Find");
 
@@ -241,6 +251,32 @@ public class MainScreen extends javax.swing.JFrame {
         fieldTel.setText(client.getTel().toString());
         fieldCpf.setText(client.getCpf().toString());
     }//GEN-LAST:event_jTableClientMouseClicked
+
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+        int getLine = jTableClient.getSelectedRow();
+        Long cpf = (Long) jTableClient.getValueAt(getLine, 0);
+        
+    }//GEN-LAST:event_buttonUpdateActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        int getLine = jTableClient.getSelectedRow();
+        
+        if(getLine >= 0) {
+            int result = JOptionPane.showConfirmDialog(this, "Do you really want to delete?", "WARNIG", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            if(result == JOptionPane.YES_OPTION){
+                Long cpf = (Long) jTableClient.getValueAt(getLine, 0);
+                this.dao.delete(cpf);
+                jTable.removeRow(getLine);
+                
+                JOptionPane.showMessageDialog(this, "CPF " + cpf + " deleted with success");
+                cleanFields();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a client", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

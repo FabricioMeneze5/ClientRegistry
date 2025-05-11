@@ -191,11 +191,17 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonUpdateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Button" name="buttonDelete">
       <Properties>
         <Property name="label" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Button" name="buttonFind">
       <Properties>

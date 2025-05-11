@@ -30,4 +30,8 @@ public class Table {
     public void addRow(Object[] row) {
         table.addRow(row);
     }
+    
+    public void removeRow(int row) {
+        table.removeRow(row);
+    }
 }
