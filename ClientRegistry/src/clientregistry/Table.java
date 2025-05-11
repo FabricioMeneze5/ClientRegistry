@@ -15,11 +15,16 @@ public class Table {
     };
     
     public void initCustomComponents(JTable jTable) {
+    table.addColumn("CPF");
     table.addColumn("Name");
     table.addColumn("Phone");
     table.addColumn("Email");
    
     jTable.setModel(table);
+    
+    jTable.getColumnModel().getColumn(0).setMinWidth(0);
+    jTable.getColumnModel().getColumn(0).setMaxWidth(0);
+    jTable.getColumnModel().getColumn(0).setWidth(0);
     }
     
     public void addRow(Object[] row) {
