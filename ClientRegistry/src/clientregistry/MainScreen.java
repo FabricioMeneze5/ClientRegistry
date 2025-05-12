@@ -88,6 +88,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         buttonFind.setLabel("Find");
+        buttonFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFindActionPerformed(evt);
+            }
+        });
 
         jTableClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -298,6 +303,32 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
+    private void buttonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFindActionPerformed
+
+        String findCpf = null;
+        
+        while(true){
+            findCpf = JOptionPane.showInputDialog(this, "Type CPF to be found.");
+            
+            if(findCpf == null) {
+                return;
+            }
+            
+            if(isValidField(findCpf)){
+                break;
+            }
+            JOptionPane.showMessageDialog(this, "You must type a CPF", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        Client client = dao.find(Long.valueOf(findCpf));
+        
+        if (client == null) {
+            JOptionPane.showMessageDialog(this, "cliente nao encontrado");
+        } else {
+            JOptionPane.showMessageDialog(this, "Nome: " + client.getName() + "\nEmail: " + client.getEmail() + "\nPhone: " + client.getTel() + "\nCPF: " + client.getCpf());
+        }
+    }//GEN-LAST:event_buttonFindActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button buttonDelete;
@@ -322,7 +353,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private boolean isValidField(String ...fields) {
         for (String field : fields) {
-            if (fields == null || "".equals(field)) {
+            if (field == null || field.trim().isEmpty()) {
                 return false;
             }
         }
