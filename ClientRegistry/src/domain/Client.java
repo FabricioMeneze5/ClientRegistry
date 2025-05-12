@@ -10,13 +10,13 @@ import java.util.Objects;
 public class Client {
     private String name;
     private Long cpf;
-    private Long tel;
+    private Long pho;
     private String email;
 
-    public Client(String name, String cpf, String tel, String email) {
+    public Client(String name, String cpf, String pho, String email) {
         this.name = name;
         this.cpf = Long.valueOf(cpf.trim());
-        this.tel = Long.valueOf(tel.trim());
+        this.pho = Long.valueOf(pho.trim());
         this.email = email;
     }
     
@@ -50,8 +50,8 @@ public class Client {
         return cpf;
     }
 
-    public Long getTel() {
-        return tel;
+    public Long getPho() {
+        return pho;
     }
 
     public String getEmail() {
@@ -66,8 +66,8 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public void setTel(Long tel) {
-        this.tel = tel;
+    public void setPho(Long pho) {
+        this.pho = pho;
     }
 
     public void setEmail(String email) {
@@ -76,7 +76,7 @@ public class Client {
     
     @Override
     public String toString() {
-        return name + ", Email: " + email + ", Tel: " + tel;
+        return name + ", Email: " + email + ", Phone: " + pho;
     }
     
 }

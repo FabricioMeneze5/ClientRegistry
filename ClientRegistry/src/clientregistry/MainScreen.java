@@ -29,7 +29,7 @@ public class MainScreen extends javax.swing.JFrame {
         labelCpf = new java.awt.Label();
         fieldCpf = new java.awt.TextField();
         labelTel = new java.awt.Label();
-        fieldTel = new java.awt.TextField();
+        fieldPho = new java.awt.TextField();
         labelEmail = new java.awt.Label();
         fieldEmail = new java.awt.TextField();
         buttonSave = new java.awt.Button();
@@ -147,7 +147,7 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addGap(21, 21, 21)
                                         .addComponent(labelTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fieldTel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(fieldPho, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(fieldName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(25, 25, 25))
@@ -181,7 +181,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(labelCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(fieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(fieldTel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fieldPho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(labelTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,23 +209,23 @@ public class MainScreen extends javax.swing.JFrame {
         String name = fieldName.getText();
         String cpf = fieldCpf.getText();
         String email = fieldEmail.getText();
-        String tel = fieldTel.getText();
+        String pho = fieldPho.getText();
 
-        if (!isValidField(name, cpf, email, tel)) {
+        if (!isValidField(name, cpf, email, pho)) {
             JOptionPane.showMessageDialog(this, "You must fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        Client client = new Client(name, cpf, tel, email);
+        Client client = new Client(name, cpf, pho, email);
         Boolean isRegister = dao.save(client);
         
         if(isRegister) {
-            jTable.addRow(new Object[]{ client.getCpf(), client.getName(), client.getTel(), client.getEmail()});
+            jTable.addRow(new Object[]{ client.getCpf(), client.getName(), client.getPho(), client.getEmail()});
             
-            JOptionPane.showMessageDialog(this, "cadastrado com sucesso");
+            JOptionPane.showMessageDialog(this, "Client add with success.");
             cleanFields();
         } else {
-            JOptionPane.showMessageDialog(this, "cliente ja cadastrado", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Client already added", "Error", JOptionPane.ERROR_MESSAGE);
         }   
     }//GEN-LAST:event_buttonSaveActionPerformed
 
@@ -254,7 +254,7 @@ public class MainScreen extends javax.swing.JFrame {
         
         fieldName.setText(client.getName());
         fieldEmail.setText(client.getEmail());
-        fieldTel.setText(client.getTel().toString());
+        fieldPho.setText(client.getPho().toString());
         fieldCpf.setText(client.getCpf().toString());
     }//GEN-LAST:event_jTableClientMouseClicked
 
@@ -268,7 +268,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (client != null) {
                 client.setCpf(Long.valueOf(fieldCpf.getText()));
                 client.setName(fieldName.getText());
-                client.setTel(Long.valueOf(fieldTel.getText()));
+                client.setPho(Long.valueOf(fieldPho.getText()));
                 client.setEmail(fieldEmail.getText());
             
                 dao.update(client);
@@ -323,9 +323,9 @@ public class MainScreen extends javax.swing.JFrame {
         Client client = dao.find(Long.valueOf(findCpf));
         
         if (client == null) {
-            JOptionPane.showMessageDialog(this, "cliente nao encontrado");
+            JOptionPane.showMessageDialog(this, "Client not found");
         } else {
-            JOptionPane.showMessageDialog(this, "Nome: " + client.getName() + "\nEmail: " + client.getEmail() + "\nPhone: " + client.getTel() + "\nCPF: " + client.getCpf());
+            JOptionPane.showMessageDialog(this, "Name: " + client.getName() + "\nEmail: " + client.getEmail() + "\nPhone: " + client.getPho() + "\nCPF: " + client.getCpf());
         }
     }//GEN-LAST:event_buttonFindActionPerformed
 
@@ -338,7 +338,7 @@ public class MainScreen extends javax.swing.JFrame {
     private java.awt.TextField fieldCpf;
     private java.awt.TextField fieldEmail;
     private java.awt.TextField fieldName;
-    private java.awt.TextField fieldTel;
+    private java.awt.TextField fieldPho;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -363,7 +363,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void cleanFields() {
         fieldName.setText("");
         fieldCpf.setText("");
-        fieldTel.setText("");
+        fieldPho.setText("");
         fieldEmail.setText("");
     }
     
@@ -372,7 +372,7 @@ public class MainScreen extends javax.swing.JFrame {
     model.setRowCount(0);
     
     for (Client c : dao.findAll()) {
-        model.addRow(new Object[]{ c.getCpf(), c.getName(), c.getTel(), c.getEmail() });
+        model.addRow(new Object[]{ c.getCpf(), c.getName(), c.getPho(), c.getEmail() });
     }
 }
 }

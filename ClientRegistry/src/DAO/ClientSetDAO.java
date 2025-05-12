@@ -49,7 +49,7 @@ public class ClientSetDAO implements IClientDAO{
                 if(clientSaved.equals(client)){
                     clientSaved.setName(client.getName());
                     clientSaved.setCpf(client.getCpf());
-                    clientSaved.setTel(client.getTel());
+                    clientSaved.setPho(client.getPho());
                     clientSaved.setEmail(client.getEmail());
                     break;
                 }
