@@ -5,6 +5,7 @@ import DAO.IClientDAO;
 import javax.swing.JOptionPane;
 import clientregistry.Table;
 import domain.Client;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -254,8 +255,27 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         int getLine = jTableClient.getSelectedRow();
-        Long cpf = (Long) jTableClient.getValueAt(getLine, 0);
-        
+
+        if (getLine >= 0) {
+            Long cpf = (Long) jTableClient.getValueAt(getLine, 0);
+            Client client = dao.find(cpf);
+            
+            if (client != null) {
+                client.setCpf(Long.valueOf(fieldCpf.getText()));
+                client.setName(fieldName.getText());
+                client.setTel(Long.valueOf(fieldTel.getText()));
+                client.setEmail(fieldEmail.getText());
+            
+                dao.update(client);
+            
+                updateTable();
+                cleanFields();
+                JOptionPane.showMessageDialog(this, "Update success");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a client", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
@@ -315,4 +335,13 @@ public class MainScreen extends javax.swing.JFrame {
         fieldTel.setText("");
         fieldEmail.setText("");
     }
+    
+    private void updateTable() {
+    DefaultTableModel model = (DefaultTableModel) jTableClient.getModel();
+    model.setRowCount(0);
+    
+    for (Client c : dao.findAll()) {
+        model.addRow(new Object[]{ c.getCpf(), c.getName(), c.getTel(), c.getEmail() });
+    }
+}
 }

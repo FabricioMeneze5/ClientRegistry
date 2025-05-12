@@ -34,4 +34,5 @@ public class Table {
     public void removeRow(int row) {
         table.removeRow(row);
     }
+    
 }
